@@ -5,7 +5,7 @@ except ImportError:
     import Tkinter as tkinter
 
 imagenes = ["icon/ahorcado_0.gif", "icon/ahorcado_1.gif", "icon/ahorcado_2.gif", "icon/ahorcado_3.gif",
-            "icon/ahorcado_4.gif", "icon/ahorcado_5.gif", "icon/ahorcado_6.gif"]
+            "icon/ahorcado_4.gif", "icon/ahorcado_5.gif", "icon/ahorcado_6.gif", "icon/ahorcado_7.gif"]
 errores = ["icon/emo6.gif", "icon/emo5.gif", "icon/emo4.gif", "icon/emo3.gif", "icon/emo2.gif",
            "icon/emo1.gif", "icon/emo0.gif"]
 palabras = ''''hormiga babuino tejon murcielago oso castor
@@ -57,10 +57,11 @@ def actualizar_imagenes(numero_errores):
     label_image = tkinter.Label(mainWindow, image=image)
     label_image.grid(row=0, column=1, sticky='nsew')
 
-    label_life.destroy()
-    life = tkinter.PhotoImage(file=errores[numero_errores])
-    label_life = tkinter.Label(life_frame, image=life)
-    label_life.grid(row=2, column=0, sticky='new')
+    if numero_errores != 7:
+        label_life.destroy()
+        life = tkinter.PhotoImage(file=errores[numero_errores])
+        label_life = tkinter.Label(life_frame, image=life)
+        label_life.grid(row=2, column=0, sticky='new')
 
 
 def nueva_partida():
@@ -112,14 +113,14 @@ def pulsar_letra(rowx, coly):
                 acertado = False
                 break
         if acertado:
-            actualizar_imagenes(0)
+            actualizar_imagenes(7)
             nueva_partida()
     else:
         letras_incorrectas.append(letra_seleccionada)
         actualizar_imagenes(len(letras_incorrectas))
-        # Si el número de letras incorrectas es igual al de imágenes, hemos perdido y ofrecemos jugar
+        # Si el número de letras incorrectas es igual al de imágenes -2, hemos perdido y ofrecemos jugar
         # una nueva partida
-        if len(letras_incorrectas) == len(imagenes) - 1:
+        if len(letras_incorrectas) == len(imagenes) - 2:
             nueva_partida()
 
 
